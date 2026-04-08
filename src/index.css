@@ -1,7 +1,9 @@
 @import "tailwindcss";
 
+/* Variables de tema */
 @theme {
-  --color-universe-dark: #0B0E14;
+
+  --color-universe-dark: #141e30;
   --color-universe-purple: #7C3AED;
   --color-universe-blue: #3B82F6;
 
@@ -11,11 +13,12 @@
   --radius-2xl: 1.5rem;
 
   --animate-float: float 6s ease-in-out infinite;
+}
 
-  @keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-15px); }
-  }
+/* Keyframes VAN FUERA */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
 }
 
 @layer base {
