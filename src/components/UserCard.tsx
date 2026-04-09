@@ -55,11 +55,11 @@ export const UserCard = ({
         )}
         {/* Indicador día/noche */}
         <div className="absolute bottom-0 right-0 w-5 h-5 rounded-full bg-universe-dark flex items-center justify-center border border-white/10">
-          {isDay
-            ? <Sun size={10} className="text-yellow-400" />
-            : <Moon size={10} className="text-blue-300" />
-          }
-        </div>
+  {isDay
+    ? <Sun size={10} className="text-yellow-400" />
+    : <Moon size={10} className="text-blue-300" />
+  }
+</div>
       </div>
 
       {/* Info */}
