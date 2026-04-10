@@ -1,4 +1,4 @@
-import { Clock, MapPin, Moon, Sun, Thermometer } from "lucide-react";
+import {  Moon, Sun, Thermometer } from "lucide-react";
 import { motion } from "framer-motion";
 import { useLocalTime } from "../../hooks/useLocalTime";
 import { useWeather } from "../../hooks/useWeather";
@@ -21,8 +21,7 @@ interface OrbitCardProps {
 }
 
 export const OrbitCard = ({
-  id, name, role, location, timezone, city,
-  imageUrl, isActive = false, angle, orbitRadius,
+  id, name, location, timezone, city, isActive = false, angle, orbitRadius,
 }: OrbitCardProps) => {
   const dispatch = useAppDispatch();
   const { time, isDay, isWorking } = useLocalTime(timezone);
