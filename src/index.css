@@ -1,5 +1,14 @@
 @import "tailwindcss";
 
+/* Ocultar scrollbar en toda la app */
+* {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+*::-webkit-scrollbar {
+  display: none;
+}
+
 /* Variables de tema */
 @theme {
 

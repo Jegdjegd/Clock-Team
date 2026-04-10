@@ -28,7 +28,7 @@ const initialState: TeammatesState = {
       location: "Tokyo, JP",
       city: "Tokyo",
       timezone: "Asia/Tokyo",
-      delay: "1.5s",
+      delay: "0.8s",
     },
     {
       id: "2",
@@ -37,7 +37,7 @@ const initialState: TeammatesState = {
       location: "Berlin, DE",
       city: "Berlin",
       timezone: "Europe/Berlin",
-      delay: "2.5s",
+      delay: "0.4s",
     },
     {
       id: "3",
@@ -46,7 +46,7 @@ const initialState: TeammatesState = {
       location: "New York, US",
       city: "New York",
       timezone: "America/New_York",
-      delay: "3.5s",
+      delay: "0.2s",
     },
   ],
   activeId: null,

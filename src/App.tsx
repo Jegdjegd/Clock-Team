@@ -1,14 +1,122 @@
+// src/App.tsx
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { BottomNav } from "./components/BottomNav";
 import { UserCard } from "./components/UserCard";
+import { DesktopNav } from "./components/desktop/DesktopNav";
+import { OrbitalView } from "./components/desktop/OrbitalView";
 import { useAppSelector } from "./hooks/useAppDispatch";
+import { useLocalTime } from "./hooks/useLocalTime";
 
-const OrbitView = () => {
+const STARS = Array.from({ length: 80 }, (_, i) => ({
+  id: i,
+  top: `${(i * 37.3) % 100}%`,
+  left: `${(i * 61.7) % 100}%`,
+  size: (i * 13) % 3 === 0 ? "2px" : "1px",
+  opacity: 0.1 + ((i * 7) % 10) / 14,
+  duration: 2 + ((i * 3) % 3),
+  delay: `${(i * 0.4) % 3}s`,
+}));
+
+const DynamicBackground = () => {
   const { list, activeId } = useAppSelector(state => state.teammates);
+  const active = list.find(t => t.id === activeId);
+  const timezone = active?.timezone ?? "UTC";
+  const { isDay } = useLocalTime(timezone);
+  const isNight = !activeId || !isDay;
 
   return (
-    <div className="flex flex-col items-center pt-12 px-6">
-      <h1 className="text-4xl font-black tracking-tighter italic text-white/90">ClockTeam "En construcción"</h1>
+    <div className="fixed inset-0 -z-10 overflow-hidden">
+      <div className="absolute inset-0 bg-[#0a0a0f]" />
+
+      {/* Noche */}
+      <div
+        className="absolute inset-0 transition-opacity duration-[1500ms] ease-in-out"
+        style={{ opacity: isNight ? 1 : 0 }}
+      >
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(ellipse at 30% 20%, rgba(124,58,237,0.18) 0%, transparent 60%), radial-gradient(ellipse at 70% 80%, rgba(99,38,180,0.12) 0%, transparent 50%)",
+          }}
+        />
+        {STARS.map(star => (
+          <div
+            key={star.id}
+            className="absolute rounded-full bg-white"
+            style={{
+              top: star.top,
+              left: star.left,
+              width: star.size,
+              height: star.size,
+              opacity: star.opacity,
+              animation: `pulse ${star.duration}s ease-in-out infinite`,
+              animationDelay: star.delay,
+            }}
+          />
+        ))}
+      </div>
+
+      {/* Día */}
+      <div
+        className="absolute inset-0 transition-opacity duration-[1500ms] ease-in-out"
+        style={{ opacity: isNight ? 0 : 1 }}
+      >
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(ellipse at 50% 0%, rgba(56,189,248,0.45) 0%, rgba(14,165,233,0.20) 35%, rgba(99,179,237,0.08) 60%, transparent 80%)",
+          }}
+        />
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(to bottom, rgba(56,189,248,0.15) 0%, rgba(56,189,248,0.05) 40%, transparent 70%)",
+          }}
+        />
+        <div
+          className="absolute"
+          style={{
+            top: "6%", left: "50%", transform: "translateX(-50%)",
+            width: "140px", height: "140px", borderRadius: "50%",
+            background: "radial-gradient(circle, rgba(251,191,36,0.35) 0%, rgba(251,191,36,0.12) 50%, transparent 70%)",
+          }}
+        />
+        <div
+          className="absolute"
+          style={{
+            top: "2%", left: "50%", transform: "translateX(-50%)",
+            width: "260px", height: "260px", borderRadius: "50%",
+            background: "radial-gradient(circle, rgba(251,191,36,0.10) 0%, rgba(56,189,248,0.06) 50%, transparent 70%)",
+          }}
+        />
+        <div
+          className="absolute inset-0"
+          style={{ background: "radial-gradient(ellipse at 20% 10%, rgba(147,210,255,0.12) 0%, transparent 50%)" }}
+        />
+        <div
+          className="absolute inset-0"
+          style={{ background: "radial-gradient(ellipse at 80% 10%, rgba(147,210,255,0.10) 0%, transparent 50%)" }}
+        />
+      </div>
+
+      <div
+        className="absolute inset-0"
+        style={{ background: "radial-gradient(ellipse at bottom, rgba(10,10,15,0.8) 0%, transparent 70%)" }}
+      />
+    </div>
+  );
+};
+
+const MobileView = () => {
+  const { list, activeId } = useAppSelector(state => state.teammates);
+  return (
+    <div className="flex flex-col items-center pt-12 px-6 md:hidden">
+      <h1 className="text-4xl font-black tracking-tighter italic text-white/90">
+        CHRONOS
+      </h1>
       <p className="text-[9px] text-universe-purple tracking-[0.4em] font-bold mt-2">
         GLOBAL SYNC ACTIVE
       </p>
@@ -21,6 +129,7 @@ const OrbitView = () => {
             role={teammate.role}
             location={teammate.location}
             timezone={teammate.timezone}
+            city={teammate.city}
             imageUrl={teammate.imageUrl}
             delay={teammate.delay}
             isActive={teammate.id === activeId}
@@ -34,11 +143,25 @@ const OrbitView = () => {
 function App() {
   return (
     <Router>
-      <div className="relative min-h-screen pb-32">
-        <div className="fixed inset-0 bg-[radial-gradient(ellipse_at_top,var(--tw-gradient-stops))] from-universe-purple/10 via-universe-dark to-universe-dark -z-10" />
+      <div className="relative min-h-screen flex flex-col pb-32 md:pb-0">
+        <DynamicBackground />
+
+        {/* Desktop nav — solo visible en md+ */}
+        <DesktopNav />
+
         <Routes>
-          <Route path="/" element={<OrbitView />} />
+          <Route
+            path="/"
+            element={
+              <>
+                <MobileView />
+                <OrbitalView />
+              </>
+            }
+          />
         </Routes>
+
+        {/* Bottom nav — solo visible en mobile */}
         <BottomNav />
       </div>
     </Router>
