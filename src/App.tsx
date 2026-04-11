@@ -7,6 +7,8 @@ import { OrbitalView } from "./components/desktop/OrbitalView";
 import { useAppSelector } from "./hooks/useAppDispatch";
 import { useLocalTime } from "./hooks/useLocalTime";
 
+
+// comentar codigo a partir de aqui empieza el libro 1
 const STARS = Array.from({ length: 80 }, (_, i) => ({
   id: i,
   top: `${(i * 37.3) % 100}%`,
@@ -24,13 +26,16 @@ const DynamicBackground = () => {
   const { isDay } = useLocalTime(timezone);
   const isNight = !activeId || !isDay;
 
+
+  const temaNoche = "absolute inset-0 transition-opacity duration-[1500ms] ease-in-out"
+
   return (
     <div className="fixed inset-0 -z-10 overflow-hidden">
       <div className="absolute inset-0 bg-[#0a0a0f]" />
 
       {/* Noche */}
       <div
-        className="absolute inset-0 transition-opacity duration-[1500ms] ease-in-out"
+        className= {temaNoche}
         style={{ opacity: isNight ? 1 : 0 }}
       >
         <div
