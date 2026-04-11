@@ -8,7 +8,7 @@ import { useAppSelector } from "./hooks/useAppDispatch";
 import { useLocalTime } from "./hooks/useLocalTime";
 
 
-// comentar codigo a partir de aqui empieza el libro 1
+
 const STARS = Array.from({ length: 80 }, (_, i) => ({
   id: i,
   top: `${(i * 37.3) % 100}%`,

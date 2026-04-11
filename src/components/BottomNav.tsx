@@ -1,4 +1,3 @@
-// src/components/BottomNav.tsx
 import { Globe, Users, Search, User } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -16,7 +15,8 @@ export const BottomNav = () => {
         onClose={() => setModalOpen(false)}
       />
 
-      <nav className="fixed bottom-0 left-0 right-0 glass border-t-0 rounded-t-[2.5rem] px-8 py-4 z-40">
+      {/* Bottom nav — solo mobile */}
+      <nav className="md:hidden fixed bottom-0 left-0 right-0 glass border-t-0 rounded-t-[2.5rem] px-8 py-4 z-40">
         <div className="flex justify-between items-center max-w-md mx-auto">
           <NavItem to="/" icon={<Globe size={22} />} label="ORBIT" active={location.pathname === "/"} />
           <NavItem to="/team" icon={<Users size={22} />} label="TEAM" active={location.pathname === "/team"} />
@@ -24,6 +24,7 @@ export const BottomNav = () => {
           <NavItem to="/me" icon={<User size={22} />} label="ME" active={location.pathname === "/me"} />
         </div>
 
+        {/* Botón + mobile */}
         <motion.button
           whileTap={{ scale: 0.9 }}
           onClick={() => setModalOpen(true)}
@@ -32,11 +33,26 @@ export const BottomNav = () => {
           <span className="text-3xl font-light text-white">+</span>
         </motion.button>
       </nav>
+
+      {/* Botón + desktop — solo visible en md+ */}
+      <motion.button
+        whileTap={{ scale: 0.9 }}
+        whileHover={{ scale: 1.05 }}
+        onClick={() => setModalOpen(true)}
+        className="hidden md:flex fixed bottom-8 right-8 w-14 h-14 bg-universe-purple rounded-full items-center justify-center shadow-[0_0_24px_rgba(124,58,237,0.5)] border-2 border-universe-purple/50 z-50"
+      >
+        <span className="text-2xl font-light text-white">+</span>
+      </motion.button>
     </>
   );
 };
 
-const NavItem = ({ to, icon, label, active }: { to: string; icon: any; label: string; active: boolean }) => (
+const NavItem = ({ to, icon, label, active }: {
+  to: string;
+  icon: any;
+  label: string;
+  active: boolean;
+}) => (
   <Link to={to} className="flex flex-col items-center gap-1.5 relative">
     <div className={`transition-all duration-700 ${active ? "text-universe-purple" : "text-white/40"}`}>
       {icon}
