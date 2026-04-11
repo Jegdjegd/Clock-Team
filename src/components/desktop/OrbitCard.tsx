@@ -21,7 +21,7 @@ interface OrbitCardProps {
 }
 
 export const OrbitCard = ({
-  id, name, role, location, timezone, city,
+  id, name, location, timezone, city,
   isActive = false, angle, orbitRadiusX, orbitRadiusY,
 }: OrbitCardProps) => {
   const dispatch = useAppDispatch();
