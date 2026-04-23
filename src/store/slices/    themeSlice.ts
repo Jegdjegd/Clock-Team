@@ -3,11 +3,13 @@ import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 interface ThemeState {
   isDayMode: boolean;
   activeTimezone: string | null;
+  lightMode: boolean;
 }
 
 const initialState: ThemeState = {
   isDayMode: true,
   activeTimezone: null,
+  lightMode: false,
 };
 
 const themeSlice = createSlice({
@@ -25,8 +27,11 @@ const themeSlice = createSlice({
       state.isDayMode = true;
       state.activeTimezone = null;
     },
+    toggleLightMode: (state) => {
+      state.lightMode = !state.lightMode;
+    },
   },
 });
 
-export const { setThemeFromTimezone, resetTheme } = themeSlice.actions;
+export const { setThemeFromTimezone, resetTheme, toggleLightMode } = themeSlice.actions;
 export default themeSlice.reducer;

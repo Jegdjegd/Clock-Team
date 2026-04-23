@@ -18,7 +18,6 @@ export const CenterCard = () => {
   return (
     <div className="relative flex items-center justify-center">
       {/* Anillo exterior decorativo */}
-      <div className="w-64 h-64 rounded-full border border-universe-purple/20 flex items-center justify-center">
         <div className="w-56 h-56 rounded-full border border-universe-purple/30 flex items-center justify-center">
 
           {/* Círculo principal — todo el contenido aquí dentro */}
@@ -53,12 +52,12 @@ export const CenterCard = () => {
             {/* Ubicación */}
             <div className="flex items-center gap-1 z-10 mt-0.5">
               <MapPin size={9} className="text-white/30" />
-              <span className="text-white/40 text-[9px]">{ME.location}</span>
+              <span className="text-white/40 text-[11px]">{ME.location}</span>
             </div>
 
             {/* Clima */}
             {temp !== null && (
-              <p className="text-white/25 text-[8px] z-10 leading-tight">
+              <p className="text-white/25 text-[10px] z-10 leading-tight">
                 {temp}°C · {description}
               </p>
             )}
@@ -77,6 +76,5 @@ export const CenterCard = () => {
 
         </div>
       </div>
-    </div>
   );
 };

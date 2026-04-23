@@ -93,8 +93,8 @@ export const OrbitCard = ({
           </div>
           <div className="shrink-0 ml-1">
             {isDay
-              ? <Sun size={13} className="text-yellow-400" />
-              : <Moon size={13} className="text-blue-300" />
+              ? <Sun size={16} className="text-yellow-400" />
+              : <Moon size={16} className="text-blue-300" />
             }
           </div>
         </div>

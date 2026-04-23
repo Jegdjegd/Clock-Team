@@ -1,6 +1,5 @@
 @import "tailwindcss";
 
-/* Ocultar scrollbar en toda la app */
 * {
   scrollbar-width: none;
   -ms-overflow-style: none;
@@ -9,22 +8,16 @@
   display: none;
 }
 
-/* Variables de tema */
 @theme {
-
   --color-universe-dark: #141e30;
   --color-universe-purple: #7C3AED;
   --color-universe-blue: #3B82F6;
-
   --color-universe-card: rgba(255, 255, 255, 0.03);
   --color-universe-border: rgba(255, 255, 255, 0.1);
-
   --radius-2xl: 1.5rem;
-
   --animate-float: float 6s ease-in-out infinite;
 }
 
-/* Keyframes VAN FUERA */
 @keyframes float {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-15px); }
@@ -35,6 +28,11 @@
     @apply bg-universe-dark text-white font-sans antialiased;
     overflow-x: hidden;
   }
+
+  body.light-mode {
+  background: #141518;   /* antes: #f0f4ff */
+  color: #0f172a;
+}
 }
 
 .glass {
@@ -42,4 +40,12 @@
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+body.light-mode .glass {
+  background: rgb(0, 9, 174);   /* antes: 0.65 */
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(148, 163, 184, 0.5);  /* antes: rgba(255,255,255,0.9) — invisible */
+  box-shadow: 0 4px 24px rgba(99, 102, 241, 0.12);
 }

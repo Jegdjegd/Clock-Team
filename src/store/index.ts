@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
-import teammatesReducer from "./slices/    teammatesSlice.ts";
-import themeReducer from "./slices/    themeSlice.ts";
+import teammatesReducer from "./slices/    teammatesSlice";
+import themeReducer from "./slices/    themeSlice";
 
 export const store = configureStore({
   reducer: {
