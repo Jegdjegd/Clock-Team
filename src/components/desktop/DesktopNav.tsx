@@ -13,7 +13,7 @@ export const DesktopNav = () => {
       <span className={`font-black text-lg tracking-tighter italic ${
         lightMode ? "text-slate-900" : "text-white"
       }`}>
-        CHRONOS
+        CHRONOS EN CONSTRUCCION
       </span>
 
       {/* Nav tabs */}

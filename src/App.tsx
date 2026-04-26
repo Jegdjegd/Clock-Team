@@ -109,7 +109,7 @@ const MobileView = () => {
   return (
     <div className="flex flex-col items-center pt-12 px-6 md:hidden">
       <h1 className={`text-4xl font-black tracking-tighter italic ${lightMode ? "text-slate-800" : "text-white/90"}`}>
-        CHRONOS
+        CHRONOS EN CONSTRUCCION
       </h1>
       <p className="text-[9px] text-universe-purple tracking-[0.4em] font-bold mt-2">
         GLOBAL SYNC ACTIVE
