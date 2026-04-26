@@ -18,7 +18,7 @@ const STARS = Array.from({ length: 80 }, (_, i) => ({
 }));
 
 const DynamicBackground = () => {
-  const { list, activeId, lightMode } = useAppSelector(state => state.theme as any);
+  const { lightMode } = useAppSelector(state => state.theme as any);
   const teammates = useAppSelector(state => state.teammates.list);
   const activeTeammateId = useAppSelector(state => state.teammates.activeId);
   const active = teammates.find(t => t.id === activeTeammateId);
